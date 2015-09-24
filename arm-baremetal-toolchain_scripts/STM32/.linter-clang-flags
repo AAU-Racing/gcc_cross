@@ -1,0 +1,4 @@
+-DHSE_VALUE=24000000
+-DSTM32F407xx
+-std=c99
+-Wall

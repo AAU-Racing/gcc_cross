@@ -1,0 +1,32 @@
+to compile the STM32 HAL use the prefered device must be defined in "STM32Cube_FW_F4_V1.5.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include/stm32f4xx.h" or by using the -DSTM32F407xx flag when compiling
+
+the following paths must be included with the -I flag:
+STM32Cube_FW_F4_V1.5.0/Drivers/STM32F4xx_HAL_Driver/Inc
+STM32Cube_FW_F4_V1.5.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include
+STM32Cube_FW_F4_V1.5.0/Drivers/CMSIS/Include
+
+now it will only complain about missing "stm32f4xx_hal_conf.h" this is the HAL config file. A template can be found at "STM32Cube_FW_F4_V1.5.0/Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_conf_template.h"
+
+
+gcc -DSTM32F407xx -ISTM32Cube_FW_F4_V1.5.0/Drivers/STM32F4xx_HAL_Driver/Inc
+
+
+arm-none-eabi-gcc -DSTM32F407xx  -I/Users/jesper/Downloads/STM32Cube_FW_F4_V1.5.0/Drivers/STM32F4xx_HAL_Driver/Inc -I/Users/jesper/Downloads/STM32Cube_FW_F4_V1.5.0/Drivers/CMSIS/Device/ST/STM32F4xx/Include -I/Users/jesper/Documents/gcc_cross/arm-baremetal-toolchain_scripts/out/hal/inc -I/Users/jesper/Downloads/STM32Cube_FW_F4_V1.5.0/Drivers/CMSIS/Include     -c /Users/jesper/Documents/gcc_cross/arm-baremetal-toolchain_scripts/out/hal/Src/*.c
+
+
+use '$(find .  -name STM32F407V*.ld | head -1)' to locate the linker script
+
+
+Program using openOCD:
+
+/Users/jesper/Documents/gcc_cross/arm-baremetal-toolchain_scripts/out/arm-baremetal-toolchain/bin/openocd -f /Users/jesper/Documents/gcc_cross/arm-baremetal-toolchain_scripts/out/arm-baremetal-toolchain/share/openocd/scripts/board/stm32f4discovery.cfg -c "init" -c "reset halt" -c "flash write_image erase /Users/jesper/Documents/gcc_cross/arm-baremetal-toolchain_scripts/STM32/examples/build/Example" -c "reset halt"
+
+/Users/jesper/Documents/gcc_cross/arm-baremetal-toolchain_scripts/out/arm-baremetal-toolchain/bin/openocd -f /Users/jesper/Documents/gcc_cross/arm-baremetal-toolchain_scripts/out/arm-baremetal-toolchain/share/openocd/scripts/board/stm32f4discovery.cfg -c "init" -c "reset halt" -c "flash write_image erase /path/to/elf" -c "reset halt"
+
+Then use gdb to debug:
+/Users/jesper/Documents/gcc_cross/arm-baremetal-toolchain_scripts/out/arm-baremetal-toolchain/bin/arm-none-eabi-gdb /Users/jesper/Documents/gcc_cross/arm-baremetal-toolchain_scripts/STM32/examples/build/Example
+
+(gdb) target remote localhost:3333
+(gdb) load
+(gdb) break main.c:45
+(gdb) continue

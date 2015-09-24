@@ -1,0 +1,5 @@
+CC="/Users/jesper/Documents/gcc_cross/arm-baremetal-toolchain_scripts/out/arm-baremetal-toolchain/bin/arm-none-eabi-gcc" cmake -DCHIP_FAMILY="STM32F407xx" -DCHIP_FAMILY_TYPE="VG" -DEXTERNAL_STM32CUBE_PATH="/Users/jesper/Documents/gcc_cross/arm-baremetal-toolchain_scripts/STM32/cmake/test/blinking_led/STM32Cube_FW_F4_V1.7.0" -DHSE_VALUE="24000000"  ..
+
+CC="/Users/jesper/Documents/gcc_cross/arm-baremetal-toolchain_scripts/out/arm-baremetal-toolchain/bin/arm-none-eabi-gcc" cmake -DCHIP_FAMILY="STM32F407xx" -DCHIP_FAMILY_TYPE="VG" -DEXTERNAL_STM32CUBE_PATH="/Users/jesper/Documents/gcc_cross/arm-baremetal-toolchain_scripts/STM32/cmake/test/blinking_led/STM32Cube_FW_F4_V1.7.0" -DHSE_VALUE="24000000" -DOPEN_OCD=/Users/jesper/Documents/gcc_cross/arm-baremetal-toolchain_scripts/out/arm-baremetal-toolchain/bin/openocd  ..
+
+CC="/Users/jesper/Documents/gcc_cross/arm-baremetal-toolchain_scripts/out/arm-baremetal-toolchain/bin/arm-none-eabi-gcc" cmake -DCHIP_FAMILY="STM32F407xx" -DCHIP_FAMILY_TYPE="VE" -DOPEN_OCD="/Users/jesper/Documents/gcc_cross/arm-baremetal-toolchain_scripts/out/arm-baremetal-toolchain/bin/openocd" ..
